@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto&family=Russo+One&display=swap');
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+.body {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Quicksand";
+    background-color: #C3E0E5;
+}
+
+.main {
+    padding: 16px;
+}
+
+.footer{
+    padding: 24px;
+    padding-left: 1%;
+    position: relative;
+    z-index: -1;
+    background-color: #5885AF;
+}
+
+.img{
+    height: 200px;
+    width: 200px;
+}
+
+.nav{
+    border: 1px, solid, black;
+    padding: 24px;
+    background-color: #274472;
+}
+
+a:hover{
+    color: green;
+}
+
+a:active {
+    color: red;
+}
+
+.a {
+    text-decoration: none;
+    color: white;
+}
+
+.a-color-change {
+    color: #41729F;
+    text-shadow: 1px 1px 1px white;
+    text-decoration: none;
+}
+
+.grid-display {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: lightgray;
+}
+
+h1 {
+    font-family: "Russo One";
+    font-size: 64px;
+    background: linear-gradient(#41729F, #C3E0E5);
+    padding: 16px;
+    color: #0C2D48;
+    text-shadow: 1px 1px 1px black;
+}
+
+h2 {
+    font-family: "Quicksand";
+    font-size: 30px;
+    letter-spacing: 0.25cm;
+}
+
+.h1 {
+    text-align: center;
+}
+
+.h2 {
+    text-align: center;
+}
+
+.nav > a {
+    display: inline;
+    padding-right: 10px;
+}
+
+.right-align {
+    display: inline;
+    text-align: right;
+    position: absolute;
+    right: 1em;
+}
+
+.button {
+    color: #41729F;
+    text-decoration: none;
+}
+
+.div-pad {
+    padding: 6px;
+}
+
+.small {
+    font-weight: bold;
+}
+
+.edit-pad {
+    display: inline;
+    padding-right: 10px;
+}
+
+.comments-box {
+    max-height: 200px;
+    max-width: 800px;
+    margin-top: 2em;
+    overflow-y: scroll;
+    margin-bottom: 1em;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 1em;
+    background-color: white;
+}
+
+/* .comment {
+    margin-bottom: 1em;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 1em;
+    background-color: white;
+} */
+
+.img-detail {
+    height: 600px;
+    width: 600px;
+}
+
+.ratings {
+    display: inline-block;
+    font-size: 18px;
+}
+
+.star {
+    color: #FFC107;
+}
+
+.star:hover ~ .star {
+    color: #CCC;
+}
+
+.star:hover {
+    color: #FFC107;
+}

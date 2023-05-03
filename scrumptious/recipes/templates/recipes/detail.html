@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{recipe_object.title}} - Scrumptious Recipes
+{% endblock title %}
+
+{% block content %}
+<div class="wrapper">
+    <header>
+        <nav class="nav">
+            <a class="a" href="{% url 'recipe_list' %}">Main Page</a>
+
+            {% if user.is_authenticated %}
+                <a class="a" href="{% url 'create_recipe' %}">Create A Recipe</a>
+                <a class="a" href="{% url 'my_recipe_list' %}">My Recipes</a>
+                <div class="a right-align">HELLO, {{ user.username }}</div>
+                <div class="div-pad">
+                    <button class="right-align"><a class="button" href="{% url 'user_logout' %}">Logout</a></button>
+                </div>
+            {% else %}
+                <a class="a" href="{% url 'signup' %}">Sign Up!</a>
+                <a class="a" href="{% url 'user_login' %}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main class="main">
+        <h1>{{recipe_object.title}}</h1>
+        <h3>By: {{ recipe_object.author }}</h3>
+        <p>
+            <img class='img-detail' src='{{ recipe_object.picture }}'>
+            <div>{{ recipe_object.stars }}</div>
+        </p>
+        <div>
+            <p>{{ recipe_object.description }}</p>
+        </div>
+        <h2 class="a-color-change">Ingredients</h2>
+        <p>
+            {% if user == recipe_object.author %}
+            <a class="a-color-change" href="{% url 'create_ingredient' %}">Add Ingredient</a>
+            {% endif %}
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Food Items</th>
+                    {% if user == recipe_object.author %}
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingredient in recipe_object.ingredients.all %}
+                <tr>
+                    <td>{{ ingredient.amount }}</td>
+                    <td>{{ ingredient.food_item }}</td>
+                    {% if user == recipe_object.author %}
+                        <td>
+                            <a class="a-color-change" href="{% url 'edit_ingredient' ingredient.id %}">Edit</a>
+                        </td>
+                        <td>
+                            <a class="a-color-change" href="{% url 'delete_food' ingredient.id %}">Delete</a>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <h2 class="a-color-change">Steps</h2>
+    <p>
+        {% if user == recipe_object.author %}
+        <a class="a-color-change" href="{% url 'create_recipe_step' %}">Add Step</a>
+        {% endif %}
+    </p>
+    <ol>
+        {% for step in recipe_object.steps.all %}
+        <li>
+            {{ step.instruction }}
+            {% if user == recipe_object.author %}
+                <a class="a-color-change" href="{% url 'edit_step' step.id %}">Edit</a>
+                <a class="a-color-change" href="{% url 'delete_step' step.id %}">Delete</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ol>
+    <div>
+        <p>Created On: {{ recipe_object.created_on }}</p>
+    </div>
+    {% if user == recipe_object.author %}
+    <div>
+        <a class="a-color-change" href="{% url 'edit_recipe' pk=recipe_object.pk %}">Edit Recipe</a>
+    </div>
+    <div>
+        <a class="a-color-change" href="{% url 'delete_recipe' id=recipe_object.id %}">Delete Recipe</a>
+    </div>
+    {% endif %}
+    <div class="comments-box">
+        <h2 class="a-color-change">Reviews</h2>
+        {% comment %} {% if user.is_authenticated %} {% endcomment %}
+        <a class="a-color-change" href="{% url 'create_comment' %}">Add Comment</a>
+        {% comment %} {% endif %} {% endcomment %}
+        <div class="comment">
+            {% if recipe_object.comments.all|length > 0 %}
+                {% for comment in comments %}
+                    <p class="small">{{ comment.comment }}</p>
+                    <small>{{ comment.owner }} at {{ comment.created_on }}</small>
+                    <div class="ratings">
+                        <button class="{% if user == comment.owner %} star {% endif %}">&#9733;</button>
+                        <button class="{% if user == comment.owner %} star {% endif %}">&#9733;</button>
+                        <button class="{% if user == comment.owner %} star {% endif %}">&#9733;</button>
+                        <button class="{% if user == comment.owner %} star {% endif %}">&#9733;</button>
+                        <button class="{% if user == comment.owner %} star {% endif %}">&#9733;</button>
+                    </div>
+                    {% if user == comment.owner %}
+                    <p>
+                        <small>
+                            <a class="a-color-change edit-pad" href="{% url 'edit_comment' comment.id %}">Edit</a>
+                            <a class="a-color-change edit-pad" href="{% url 'comment_delete' comment.id %}">Delete</a>
+                        </small>
+                    </p>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>There are no comments for this recipe!</p>
+            {% endif %}
+        </div>
+    </div>
+    </main>
+</div>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sign Up! - Scrumptious Recipes
+{% endblock title %}
+
+{% block content %}
+<div class="wrapper">
+<header>
+    <nav class="nav">
+        <a class="a" href="{% url 'recipe_list' %}">Main page</a>
+        <a class="a" href="{% url 'user_login' %}">Login</a>
+    </nav>
+</header>
+<main class="main">
+    <h1>Sign up!</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Sign up</button>
+    </form>
+</main>
+</div>
+{% endblock content %}

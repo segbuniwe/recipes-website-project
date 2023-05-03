@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Comment - Scrumptious Recipes
+{% endblock title %}
+
+{% block content %}
+<div class="wrapper">
+    <header>
+        <nav class="nav">
+            <a class="a" href="{% url 'recipe_list' %}">Main Page</a>
+
+            {% if user.is_authenticated %}
+            <a class="a" href="{% url 'create_recipe' %}">Create A Recipe</a>
+            <a class="a" href="{% url 'my_recipe_list' %}">My Recipes</a>
+            <div class="a right-align">HELLO, {{ user.username }}</div>
+            <div class="div-pad">
+                <button class="right-align"><a class="button" href="{% url 'user_logout' %}">Logout</a></button>
+            </div>
+            {% else %}
+                <a class="a" href="{% url 'signup' %}">Sign Up!</a>
+                <a class="a" href="{% url 'user_login' %}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+<main class="main">
+    <div>
+        <h1>Are You Sure?</h1>
+        <h2>Do you want to delete this comment?: {{ recipe_comment.comment }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button>Delete</button>
+        </form>
+    </div>
+</main>
+</div>
+{% endblock content %}
